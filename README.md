@@ -6,6 +6,6 @@
 
 | Level  | Count|
 |--------|------|
-| Easy   |  1   |
-| Medium |  1   |
+| Easy   |  3   |
+| Medium |      |
 | Hard   |      |
