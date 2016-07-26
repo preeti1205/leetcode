@@ -9,8 +9,8 @@ public:
     int size = nums.size();
         if(size>1){
             sort(nums.begin(), nums.end());
-            for(int i=0; i<size; ++i)
-                if(nums[i] == nums[i+1] && i+1 != size)
+            for(int i=1; i<size; ++i)
+                if(nums[i-1] == nums[i])
                     return true;
         }
         return false;
