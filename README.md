@@ -1,11 +1,11 @@
 # LeetCode
 
-![Status](https://img.shields.io/badge/status-40%2F329-brightgreen.svg)
+![Status](https://img.shields.io/badge/status-41%2F329-brightgreen.svg)
 
 ##### Summary
 
 | Level  | Count|
 |--------|------|
-| Easy   |  18  |
+| Easy   |  19  |
 | Medium |  21  |
 | Hard   |  1   |
