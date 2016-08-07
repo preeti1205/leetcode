@@ -10,44 +10,41 @@ You may assume all elements in the array are non-negative integers and fit in th
 
 class Solution {
 public:
-    int maximumGap(vector<int>& nums) {
-        int size = nums.size();
-        if(size < 2) return 0 ;
-        int count = 0;
-        int maxi = *max_element(nums.begin(), nums.end()); //remember
-        vector<int> final = nums;
+    int maximumGap(vector<int>& nums)
+    {
+      int size = nums.size();
+          if(size < 2) return 0 ;
+          int count = 0, result = 0;
+          int maxi = *max_element(nums.begin(), nums.end()); //remember
+          while(maxi)
+          {
+              vector<queue<int>> bucket; // important to declare inside the loop. otherwise, push_back will create more buckets
+              queue<int> q1, q0;
+              for(int i = 0; i < size ; i++)
+              {
+                  if ((nums[i]>>count)&1)   q1.push(nums[i]);
+                  else                      q0.push(nums[i]);
+              }
+              bucket.push_back(q0);
+              bucket.push_back(q1);
+              maxi >>= 1;
+              count++ ;
+              int indx= 0;
+              for(int i = 0; i < 2 ; i++)
+              {
+                  while(!bucket[i].empty())
+                  {
+                      nums[indx++] = bucket[i].front();
+                      bucket[i].pop();
+                  }
+              }
 
-        while(maxi)
-        {
-            maxi = maxi/10;
-            vector<queue<int>> bucket;
-            for(int i = 0; i < size ; i++)
-            {
-                int n  = nums[i]%10;
-                bucket[n].push(final[i]);
-                nums[i] = nums[i]/10;
-            }
-            int count = 0;
-            /*
-            for(int i = 0; i < bucket.size() ; i++)
-            {
-                while(!bucket[i].empty())
-                {
-                    final[count++] = bucket[i].front();
-                    cout<<bucket[i].front()<<" ";
-                    bucket[i].pop();
-                }
-            }
-            */
-        }
-
-        /*
-        for(int i = 0; i <size; i++)
-        {
-            cout<<final[i]<<endl;
-        }
-        */
-        return 0;
+          }
+          for(int j = 1; j< size; j++)
+          {
+              result = max(result, nums[j] - nums[j-1]);
+          }
+          return result;
 
     }
 };
