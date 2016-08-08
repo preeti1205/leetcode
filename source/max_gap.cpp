@@ -7,6 +7,37 @@ Return 0 if the array contains less than 2 elements.
 
 You may assume all elements in the array are non-negative integers and fit in the 32-bit signed integer range.
 */
+//12 ms
+
+class Solution
+{
+public:
+    int maximumGap(vector<int>& nums)
+    {    const int size = nums.size();
+         if(size < 2) return 0;
+         int maxi = *max_element(nums.begin(), nums.end());
+         int mini = *min_element(nums.begin(), nums.end());
+         if (maxi == mini) return 0;
+         double gap = double(maxi - mini)/double(size -1);
+         vector<int> max_arr(size, INT_MIN);
+         vector<int> min_arr(size, INT_MAX);
+         for(int i =0; i< size; i++)
+         {
+             int a = (nums[i] - mini)/gap;
+             max_arr[a] = max(max_arr[a], nums[i]);
+             min_arr[a] = min(min_arr[a], nums[i]);
+         }
+
+         int max_gap = 0, prev = max_arr[0];
+         for(int i =1; i < size ; i++)
+         {
+             if(min_arr[i] == INT_MAX) { continue;}
+             max_gap = max(max_gap, min_arr[i] - prev);
+             prev = max_arr[i];
+         }
+         return max_gap;
+    }
+};
 //26 ms
 /*
 class Solution
