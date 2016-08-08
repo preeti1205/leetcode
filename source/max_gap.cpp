@@ -7,6 +7,57 @@ Return 0 if the array contains less than 2 elements.
 
 You may assume all elements in the array are non-negative integers and fit in the 32-bit signed integer range.
 */
+//26 ms
+/*
+class Solution
+{
+public:
+    int maximumGap(vector<int>& nums)
+    {
+        int size = nums.size();
+        if(size < 2)return 0;
+        int maxi = *max_element(nums.begin(), nums.end()); //remember
+        int exp = 1, result= 0;
+        while(maxi)
+        {
+            countsort(nums, exp);
+            exp *= 10;
+            maxi /= 10;
+        }
+
+        for(int i =1; i < size; i++)
+        {
+            result = max(result, nums[i]- nums[i-1]);
+        }
+        return result;
+    }
+
+    void countsort(vector<int> &arr, int e )
+    {
+        vector<queue<int>> bucket;
+        queue<int> q[10];
+        int indx=0;
+        for(int i =0; i < int(arr.size()) ;i++)
+        {
+            int a= arr[i]/e;
+            q[a%10].push(arr[i]);
+        }
+        for(int i = 0; i < 10; i++)
+        {
+            bucket.push_back(q[i]);
+        }
+
+        for(int i = 0; i < int(bucket.size()); i++)
+        {
+            while(!bucket[i].empty())
+            {
+                arr[indx++] = bucket[i].front();
+                bucket[i].pop();
+            }
+        }
+
+    }
+};
 
 class Solution {
 public:
@@ -48,6 +99,7 @@ public:
 
     }
 };
+
 //30 ms solution
 /*
 class Solution {
