@@ -24,3 +24,9 @@ Input: "2*3-4*5"
 
 Output: [-34, -14, -10, -10, 10]
 */
+class Solution {
+public:
+    vector<int> diffWaysToCompute(string input) {
+        
+    }
+};
