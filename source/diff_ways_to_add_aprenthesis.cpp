@@ -27,6 +27,23 @@ Output: [-34, -14, -10, -10, 10]
 class Solution {
 public:
     vector<int> diffWaysToCompute(string input) {
+      int size = input.size();
+      if(size == 1){
         
+      }
+
+      for(int i =0; i< size; i++){
+        if(!isnum(input[i])){
+          char ch = input[i];
+          diffWaysToCompute(input.substr(0,i));
+          diffWaysToCompute(input.substr(i+1));
+          switch(ch){
+            case '*':
+            case '+':
+            case '-':
+          }
+        }
+      }
+
     }
 };
