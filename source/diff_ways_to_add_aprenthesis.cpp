@@ -28,22 +28,18 @@ class Solution {
 public:
     vector<int> diffWaysToCompute(string input) {
       int size = input.size();
-      if(size == 1){
-        
-      }
+      vector<int> result;
 
       for(int i =0; i< size; i++){
-        if(!isnum(input[i])){
-          char ch = input[i];
-          diffWaysToCompute(input.substr(0,i));
-          diffWaysToCompute(input.substr(i+1));
-          switch(ch){
-            case '*':
-            case '+':
-            case '-':
-          }
-        }
-      }
-
+        if(!isdigit(input[i])){
+          char c = input[i];
+          for(int a: diffWaysToCompute(input.substr(0,i))){
+            for(int b:diffWaysToCompute(input.substr(i+1))){
+                result.push_back(c=='+'? a+b: c=='-'? a-b: a*b);
+           }
+         }
+       }
     }
+    return result.size()? result: vector<int> {stoi(input)};
+  }
 };
