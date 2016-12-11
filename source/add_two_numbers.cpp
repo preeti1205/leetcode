@@ -15,6 +15,9 @@ Output: 7 -> 0 -> 8
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
+
+
+ // 39ms code
 void adder(int &value, bool &carry) {
     if(carry) value++;
     if (value > 9) {
@@ -59,10 +62,12 @@ public:
             prev = worker;
             worker = worker->next;
         }
-        ListNode lastest(1);
+        // ListNode last(1);    ---> don't use this.
+        //It will create a local ListNode which will be destroyed as soon as this subroutine ends. Use new instead.
 
         if(carry) {
-            prev->next = &lastest;
+            assert(prev); //make sure prev is not null
+            prev->next = new ListNode(1);
         }
 
        return result;
