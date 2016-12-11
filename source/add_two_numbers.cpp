@@ -16,14 +16,40 @@ Output: 7 -> 0 -> 8
  * };
  */
 
+ //best solution - 28 ms
+ class Solution {
+public:
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+       ListNode prehead(0), *p = &prehead;
+       int carry = 0;
+       while(l1 || l2 || carry) {
+           if (l1) carry += l1->val;
+           if (l2) carry += l2->val;
+           p->next = new ListNode(carry%10);
+           p = p->next;
+           carry = carry/10;
+           if(l1) l1 = l1->next;
+           if(l2) l2 = l2->next;
+
+       }
+       return prehead.next;
+
+    }
+};
+
 
  // 39ms code
 void adder(int &value, bool &carry) {
+    //this change gives 32 seconds
     if(carry) value++;
+    carry = (value > 9) ;
+    value %= 10;
+    /*    changing to above code reduces the runtime by 7 seconds
     if (value > 9) {
         value = value%10;
         carry = true;
     }else carry = false;
+    */
 }
 class Solution {
 public:
