@@ -13,7 +13,68 @@ Could you do it in O(n) time and O(1) space?
  * };
  */
 
- 
+ //O(1) extra space solution - not elegant
+ /**
+* Definition for singly-linked list.
+* struct ListNode {
+*     int val;
+*     ListNode *next;
+*     ListNode(int x) : val(x), next(NULL) {}
+* };
+*/
+class Solution {
+public:
+   ListNode* reverseHalf(ListNode* head, int counter) {
+       int count = counter/2;
+       if(head == NULL) return head;
+       ListNode* start = head;
+       int i = 0;
+       while( i < count ) {
+           start = start->next;
+           i++;
+       }
+
+       ListNode* prev = start;
+       start = start->next;
+       //cout<<start->val;
+
+       prev->next = NULL;
+
+       while(start) {
+           ListNode* temp = start->next;
+           start->next = prev;
+           //cout<<prev->val<<"<--"<<start->val;
+           prev = start;
+           start = temp;
+       }
+
+       return prev;
+   }
+
+   bool isPalindrome(ListNode* head) {
+       int counter = 0;
+       ListNode* temp = head;
+       while(temp) {
+           temp = temp->next;
+           counter++;
+       }
+
+       ListNode* tail = reverseHalf(head,counter);
+       int i = 0;
+
+       while(i < (counter/2) ) {
+           if (tail->val != head->val) return false;
+           tail = tail->next;
+           head = head->next;
+           i++;
+       }
+
+       return true;
+   }
+};
+
+/*******************************************************************************/
+//extra space O(n) - first try
 class Solution {
 public:
     ListNode* reverse(ListNode* head) {
