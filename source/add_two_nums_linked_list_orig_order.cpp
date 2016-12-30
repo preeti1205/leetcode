@@ -55,9 +55,7 @@ public:
 
         ListNode* prehead1 = l1;
         ListNode* prehead2 = l2;
-
         ListNode* prev1 = NULL;
-
         ListNode* prev2 = NULL;
 
         l1 = ReverseList(l1);
