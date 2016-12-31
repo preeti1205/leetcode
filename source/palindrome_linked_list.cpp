@@ -13,15 +13,36 @@ Could you do it in O(n) time and O(1) space?
  * };
  */
 
+ //O(1) super elegent Solution
+
+ class Solution {
+ public:
+     bool isPalindrome(ListNode* head) {
+         ListNode* fast = head;
+         ListNode* slow = head;
+         ListNode* rev = NULL;
+
+         while(fast && fast->next) { //for even elements, fast becomes null and for odd, fast->next becomes null
+             fast = fast->next->next;
+             ListNode* temp = slow->next;
+             slow->next = rev;
+             rev = slow;
+             slow = temp;
+         }
+         if(fast) slow = slow->next;  //if number of elements is odd, slow is at midpoint. Move it to the right
+
+         while(rev && rev->val == slow->val) {
+             rev = rev->next;
+             slow = slow->next;
+         }
+
+         return !(rev);    //if null, then it is true else not
+     }
+ };
+
+ /****************************************************************************/
+
  //O(1) extra space solution - not elegant
- /**
-* Definition for singly-linked list.
-* struct ListNode {
-*     int val;
-*     ListNode *next;
-*     ListNode(int x) : val(x), next(NULL) {}
-* };
-*/
 class Solution {
 public:
    ListNode* reverseHalf(ListNode* head, int counter) {
