@@ -19,7 +19,7 @@ public:
     ListNode* removeElements(ListNode* head, int val) {
         ListNode* prehead = new ListNode(0);
         prehead->next = head;
-        ListNode* pre = prehead;
+        ListNode* pre = prehead;     //not needed for the better solution
         ListNode* prev = prehead;
 
         while(prev) {
