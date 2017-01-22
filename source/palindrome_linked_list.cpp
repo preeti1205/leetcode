@@ -13,7 +13,7 @@ Could you do it in O(n) time and O(1) space?
  * };
  */
 
- //O(1) super elegent Solution
+ //O(1) super elegant Solution
 
  class Solution {
  public:
